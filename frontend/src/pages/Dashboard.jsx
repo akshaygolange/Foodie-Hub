@@ -9,7 +9,10 @@ import {
   IndianRupee,
 } from "lucide-react";
 
-const socket = io(import.meta.env.VITE_API_URL);
+const socket = io(import.meta.env.VITE_API_URL, {
+  transports: ["websocket", "polling"]
+});
+
 const Dashboard = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
