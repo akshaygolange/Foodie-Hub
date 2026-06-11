@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import MenuCard from "../components/MenuCard";
+import { apiUrl } from "../config/api";
 
 const Home = () => {
   const [menu, setMenu] = useState([]);
@@ -20,7 +21,7 @@ const Home = () => {
 
   const fetchMenu = async () => {
     try {
-      const response = await fetch("/api/menu");
+      const response = await fetch(apiUrl("/api/menu"));
 
       const data = await response.json();
 
@@ -67,7 +68,7 @@ const Home = () => {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
       setPlacingOrder(true);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+      const response = await fetch(apiUrl("/api/orders"), {
         method: "POST",
 
         headers: {

@@ -5,6 +5,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 
 const app = require("./app");
+const { getAllowedOrigins } = require("./config/cors");
 
 const connectDB = require("./data/db");
 
@@ -14,7 +15,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: getAllowedOrigins(),
     methods: ["GET", "POST"],
     credentials: true
   }

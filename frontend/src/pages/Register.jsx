@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 
 import toast from "react-hot-toast";
+import { apiUrl } from "../config/api";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -24,7 +25,7 @@ function Register() {
 
     try {
       setLoading(true);
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch(apiUrl("/api/auth/register"), {
         method: "POST",
 
         headers: {

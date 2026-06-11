@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../config/api";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -23,15 +24,16 @@ function Login() {
 
     try {
       setLoading(true);
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
+      const response = await fetch(apiUrl("/api/auth/login"), {
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json",
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify(formData),
         },
-
-        body: JSON.stringify(formData),
-      });
+      );
 
       const data = await response.json();
 

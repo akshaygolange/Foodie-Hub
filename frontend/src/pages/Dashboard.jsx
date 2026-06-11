@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { apiUrl, SOCKET_URL } from "../config/api";
 
 import {
   ShoppingCart,
@@ -9,7 +10,7 @@ import {
   IndianRupee,
 } from "lucide-react";
 
-const socket = io(import.meta.env.VITE_API_URL, {
+const socket = io(SOCKET_URL, {
   transports: ["websocket", "polling"]
 });
 
@@ -25,7 +26,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/orders", {
+      const response = await fetch(apiUrl("/api/orders"), {
         headers: {
           Authorization: `Bearer ${userInfo?.token}`,
         },

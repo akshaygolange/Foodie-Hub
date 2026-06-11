@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { apiUrl } from "../config/api";
 
 function MenuManagement() {
   const [menu, setMenu] = useState([]);
@@ -17,7 +18,7 @@ function MenuManagement() {
 
   const fetchMenu = async () => {
     try {
-      const response = await fetch("/api/menu");
+      const response = await fetch(apiUrl("/api/menu"));
 
       const data = await response.json();
 
@@ -31,7 +32,9 @@ function MenuManagement() {
     e.preventDefault();
 
     try {
-      const url = editingId ? `/api/menu/${editingId}` : "/api/menu";
+      const url = editingId
+        ? apiUrl(`/api/menu/${editingId}`)
+        : apiUrl("/api/menu");
 
       const method = editingId ? "PUT" : "POST";
 
@@ -76,7 +79,7 @@ function MenuManagement() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`/api/menu/${id}`, {
+      const response = await fetch(apiUrl(`/api/menu/${id}`), {
         method: "DELETE",
 
         headers: {

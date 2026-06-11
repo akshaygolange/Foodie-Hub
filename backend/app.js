@@ -1,14 +1,12 @@
 const express =require("express")
 const cors =require("cors")
+const { getAllowedOrigins } = require("./config/cors")
 
 const app =express()
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://foodie-hub-dun.vercel.app",
-    ],
+    origin: getAllowedOrigins(),
     credentials: true,
   })
 );

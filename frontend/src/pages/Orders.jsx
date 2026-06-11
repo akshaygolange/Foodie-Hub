@@ -1,8 +1,9 @@
 import { useEffect, useState, Fragment } from "react";
 
 import { io } from "socket.io-client";
+import { apiUrl, SOCKET_URL } from "../config/api";
 
-const socket = io(import.meta.env.VITE_API_URL, {
+const socket = io(SOCKET_URL, {
   transports: ["websocket", "polling"]
 });
 
@@ -21,7 +22,7 @@ function Orders() {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/orders", {
+      const response = await fetch(apiUrl("/api/orders"), {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,
         },
@@ -47,7 +48,7 @@ function Orders() {
 
   const updateStatus = async (orderId, status) => {
     try {
-      const response = await fetch(`/api/orders/${orderId}/status`, {
+      const response = await fetch(apiUrl(`/api/orders/${orderId}/status`), {
         method: "PUT",
 
         headers: {
@@ -124,7 +125,6 @@ function Orders() {
       })
     : orders;
 
-    console.log(import.meta.env.VITE_API_URL);
   return (
     <div className="p-4">
       {/* Header */}
