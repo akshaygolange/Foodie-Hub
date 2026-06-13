@@ -8,8 +8,10 @@ app.use(
   cors({
     origin: getAllowedOrigins(),
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
+
 app.use(express.json())
 
 app.get("/",(req,res) =>{
